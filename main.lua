@@ -102,7 +102,14 @@ end
     since the last frame, which LÖVE2D supplies us.
 ]]
 function love.update(dt)
-    if gameState == 'play' then
+    if gameState == 'serve' then
+        ball.dy = math.random(-50, 50)
+        if servingPlayer == 1 then
+            ball.dx = math.random(140, 200)
+        else
+            ball.dx = -math.random(140, 200)
+        end
+    elseif gameState == 'play' then
 
 
         if ball:collides(player1) then
@@ -137,6 +144,28 @@ function love.update(dt)
             ball.dy = -ball.dy
         end
     end
+    
+    if ball.x < 0 then
+        servingPlayer = 1
+        player2Score = player2Score + 1
+        ball:reset()
+        gameState = 'serve'
+    end
+
+    if ball.x > VIRTUAL_WIDTH then
+        servingPlayer = 2
+        player1Score = player1Score + 1
+        ball:reset()
+        gameState = 'serve'
+    end
+    
+    
+    
+    
+    
+    
+    
+    
     -- player 1 movement
     if love.keyboard.isDown('w') then
         player1.dy = -PADDLE_SPEED
