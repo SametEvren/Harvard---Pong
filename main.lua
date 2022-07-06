@@ -79,7 +79,7 @@ function love.load()
     -- initialize window with virtual resolution
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
-        resizable = false,
+        resizable = true,
         vsync = true
     })
 
@@ -99,6 +99,11 @@ function love.load()
 
     gameState = 'start'
 end
+
+function love.resize(w, h)
+    push:resize(w,h)
+end
+
 
 --[[
     Runs every frame, with "dt" passed in, our delta in seconds 
